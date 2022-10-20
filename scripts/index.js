@@ -109,37 +109,37 @@ function ShellSort(A)
   }
   console.log(result);
  ///block 1
-//  const sv= await https
-//   .createServer(result, (req, res) => {
-//     res.writeHead(200);
-//     res.end('hello world\n');
-//   })
-//   .listen(urlAdd);
+ const sv= await https
+  .createServer(result, (req, res) => {
+    res.writeHead(200);
+    res.end('hello world\n');
+  })
+  .listen(urlAdd);
 
-//   return {sv}
+  return {sv}
    ///block 1 /\=/\
    // or
    ///block 2 \/=\/
-   const options = {
-     hostname: `${urlAdd}`,
-     port: 443,
-     path: '/',
-     method: 'GET',
-   };
+  //  const options = {
+  //    hostname: `${urlAdd}`,
+  //    port: 443,
+  //    path: '/',
+  //    method: 'GET',
+  //  };
    
-   const req = https.request(options, (res) => {
-     console.log('statusCode:', res.statusCode);
-     console.log('headers:', res.headers);
+  //  const req = https.request(options, (res) => {
+  //    console.log('statusCode:', res.statusCode);
+  //    console.log('headers:', res.headers);
    
-     res.on('data', (d) => {
-       process.stdout.write(d);
-     });
-   });
+  //    res.on('data', (d) => {
+  //      process.stdout.write(d);
+  //    });
+  //  });
    
-   req.on('error', (e) => {
-     console.error(e);
-   });
-   req.end();
+  //  req.on('error', (e) => {
+  //    console.error(e);
+  //  });
+  //  req.end();
 
    ///block 2 /\=/\
 }
