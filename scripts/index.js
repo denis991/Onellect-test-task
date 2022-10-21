@@ -1,14 +1,15 @@
 
 let https = require ('https');
-try {
-  https = require('node:https');
-} catch (err) {
-  console.log('https support is disabled!')
-}
+try { https = require('node:https');
+} catch (err) { console.log('https support is disabled!')}
 const net = require('node:net');
 const { URL } = require('node:url');
-
+// import fetch from 'node-fetch';
+const axios = require('axios');
 const urlAdd = require("../config")
+
+
+
 
 function getRandomNumbers(min = -100, max = 100, ) {
    let count =  Math.floor(Math.random()*(81)+20);
@@ -22,11 +23,13 @@ function getRandomNumbers(min = -100, max = 100, ) {
           result.push(randomNumber);
       }
   }
-
+  // alert(result)
+  document.querySelector('.arr1').innerHTML = result
   return result;
+
 }
 
-console.log(getRandomNumbers( ));
+// console.log(getRandomNumbers( ));
 
 //-----------------------------------------------------------------
 
@@ -107,42 +110,95 @@ function ShellSort(A)
   }else{
     result= BubbleSort(arEl)
   }
-  console.log(result);
- ///block 1
- const sv= await https
-  .createServer(result, (req, res) => {
-    res.writeHead(200);
-    res.end('hello world\n');
-  })
-  .listen(urlAdd);
 
-  return {sv}
-   ///block 1 /\=/\
-   // or
-   ///block 2 \/=\/
-  //  const options = {
-  //    hostname: `${urlAdd}`,
-  //    port: 443,
-  //    path: '/',
-  //    method: 'GET',
-  //  };
-   
-  //  const req = https.request(options, (res) => {
-  //    console.log('statusCode:', res.statusCode);
-  //    console.log('headers:', res.headers);
-   
-  //    res.on('data', (d) => {
-  //      process.stdout.write(d);
-  //    });
-  //  });
-   
-  //  req.on('error', (e) => {
-  //    console.error(e);
-  //  });
-  //  req.end();
+  document.querySelector('.arrSort').innerHTML = result
 
-   ///block 2 /\=/\
+
+
+//работает
+  // let request = https.get('https://jsonplaceholder.typicode.com/users?_limit=2', (res) => {
+  //   if (res.statusCode !== 200) {
+  //     console.error(`Did not get an OK from the server. Code: ${res.statusCode}`);
+  //     res.resume();
+  //     return;
+  //   }
+  // });
+  // console.log('request: ', request);
+
+
+
+  var postData = JSON.stringify(
+    result
+  );
+  
+  var options = {
+    hostname: urlAdd,
+    port: 443,
+    path: '/post.php',
+    method: 'POST',
+    headers: {
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Content-Length': postData.length
+       }
+  };
+  var req = https.request(options, (res) => {
+    console.log('statusCode:', res.statusCode);
+    console.log('headers:', res.headers);
+    res.on('data', (d) => {
+      process.stdout.write(d);
+    });
+  });
+  req.on('error', (e) => {
+    console.error(e);
+  });
+
+  req.write(postData);
+  req.end();
+
+
+// try {
+//   const rawResponse = await fetch(urlAdd,{
+//         method:'post',
+//         // mode: 'cors',
+//         // cache: 'no-cache',
+//         headers: {
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//         },
+//         // redirect: 'follow',
+//         // referrerPolicy: 'no-referrer',
+//         // credentials: "include",
+//         title: "My post title",
+//         body:JSON.stringify(result) //для перикидывания файлов
+
+//       })
+//       const content = await rawResponse.json();
+
+
+
+
+//     const  response  = await axios.post(urlAdd, {
+//     title: "My post title",
+//     body: result
+//     })
+
+//     console.log(`data: `, response)
+
+
+//   } catch (error) {
+//     // console.log('error: ', error);
+//     const response = error
+//   }
+
+
+  // return response
 }
+
+
+
+
+console.log(getRandomNumbers( ));
 console.log(ranfun(getRandomNumbers()));
 
 // console.log(urlAdd);
+

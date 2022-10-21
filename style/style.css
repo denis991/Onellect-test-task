@@ -4,3 +4,11 @@ html, body, #map {
   padding: 2rem;
   margin: 2rem;
 }
+.arr1, .arrSort{
+  border: 1px double;
+
+  min-height: 100px;
+  max-width: 400px;
+  white-space:pre-line;
+  word-wrap:break-word
+}
